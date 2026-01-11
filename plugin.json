@@ -1,6 +1,6 @@
 {
   "name": "kage-bunshin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Kage Bunshin multi-AI orchestration tools - health checks, parallel execution, and environment management",
-  "skills": ["skills/kb-status"]
+  "skills": ["skills/kb-status", "skills/ollama-smoke-test"]
 }
