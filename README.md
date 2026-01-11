@@ -48,6 +48,40 @@ Node: ndnlinuxsrv2     OK       100.113.166.1 reachable
 Overall: HEALTHY
 ```
 
+### `/council` - LLM Council Query
+
+Query 4+ LLMs in parallel and get a synthesized answer.
+
+```bash
+# Basic query with streaming
+/council "What are the benefits of TypeScript?"
+
+# Or run directly with flags
+python3 /home/ndninja/projects/llm-council/council.py --stream "Your question"
+
+# With peer review (2-stage deliberation)
+python3 /home/ndninja/projects/llm-council/council.py --stream --peer-review "Complex question"
+
+# Disable specialists
+python3 /home/ndninja/projects/llm-council/council.py --stream --no-specialists "Coding question"
+```
+
+**Models:**
+| Model | Type | Strength |
+|-------|------|----------|
+| GPT-5.2 | Core | Reasoning, frameworks |
+| Claude Sonnet 4.5 | Core | Clarity, synthesis |
+| Gemini 3 Pro | Core | Comprehensive analysis |
+| Perplexity Sonar | Core | Real-time web search |
+| DeepSeek Coder 33B | Specialist | Auto-added for coding |
+| DeepSeek R1 32B | Specialist | Auto-added for math |
+
+**Flags:**
+- `--stream` - Show responses as they complete
+- `--peer-review` - 2-stage deliberation (2x cost)
+- `--no-specialists` - Core 4 models only
+- `--no-cache` - Fresh results
+
 ### `/ollama-smoke-test` - Model Validation
 
 Run coding probes against Ollama models to validate they're working correctly.
@@ -130,5 +164,5 @@ This plugin is auto-discovered from `~/.claude/plugins/local/kage-bunshin/`.
 
 ## Version
 
-- **Plugin Version**: 0.2.0
+- **Plugin Version**: 0.3.0
 - **Last Updated**: 2026-01-10
