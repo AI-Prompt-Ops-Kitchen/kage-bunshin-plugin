@@ -40,7 +40,7 @@ class ProbeResult:
 
 class OllamaSmokeTest:
     def __init__(self, host: str = None, model: str = None, timeout: int = None):
-        self.host = host or os.environ.get("OLLAMA_HOST", "http://100.98.226.75:11434")
+        self.host = host or os.environ.get("OLLAMA_HOST", "http://localhost:11434")
         self.model = model or "deepseek-coder:33b"
         self.timeout = timeout or int(os.environ.get("OLLAMA_TIMEOUT", "60"))
         self.host = self.host.rstrip("/")

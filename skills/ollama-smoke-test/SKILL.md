@@ -42,7 +42,7 @@ The smoke test runs these coding challenges:
 OLLAMA SMOKE TEST RESULTS
 =========================
 Model: deepseek-coder:33b
-Host: http://100.98.226.75:11434
+Host: http://localhost:11434
 
 Probe              Result   Time    Details
 -----              ------   ----    -------
@@ -60,5 +60,5 @@ Total time: 8.9s
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `OLLAMA_HOST` | `http://100.98.226.75:11434` | Ollama server URL |
+| `OLLAMA_HOST` | `http://localhost:11434` | Ollama server URL |
 | `OLLAMA_TIMEOUT` | `60` | Request timeout in seconds |

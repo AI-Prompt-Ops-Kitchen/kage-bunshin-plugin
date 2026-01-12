@@ -38,7 +38,7 @@ class HealthResult:
 class HealthChecker:
     def __init__(self):
         self.api_host = os.environ.get("KB_API_HOST", "http://localhost:8000")
-        self.ollama_host = os.environ.get("OLLAMA_HOST", "http://100.98.226.75:11434")
+        self.ollama_host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
         self.pg_host = os.environ.get("PG_HOST", "localhost")
         self.pg_database = os.environ.get("PG_DATABASE", "claude_memory")
         self.pg_user = os.environ.get("PG_USER", "claude_mcp")
@@ -137,11 +137,11 @@ class HealthChecker:
             self.check_tailscale(),
         ]
 
-        # Check key nodes
+        # Check key nodes - UPDATE THESE WITH YOUR IPs
         nodes = [
-            ("100.98.226.75", "Vengeance"),
-            ("100.77.248.9", "Linux Server"),
-            ("100.113.166.1", "ndnlinuxsrv2"),
+            # ("<GPU_PRIMARY_IP>", "node-gpu-primary"),
+            # ("<PRIMARY_IP>", "node-primary"),
+            # ("<SECONDARY_IP>", "node-secondary"),
         ]
         for host, name in nodes:
             self.results.append(self.check_node_connectivity(host, name))

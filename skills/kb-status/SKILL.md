@@ -24,17 +24,16 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/health_check.py
 - **Expected**: HTTP 200 response
 
 ### 2. PostgreSQL Database
-- **Host**: 100.77.248.9 (Tailscale) or localhost
+- **Host**: localhost (or configured PG_HOST)
 - **Database**: claude_memory
 - **Tables**: development_docs, tasks, progress_events
 
 ### 3. Ollama LLM Runtime
-- **Vengeance Host**: 100.98.226.75:11434
-- **Local Host**: localhost:11434
+- **Host**: localhost:11434 (or configured OLLAMA_HOST)
 - **Expected Models**: deepseek-coder:33b, deepseek-r1:32b, qwen2.5:32b
 
 ### 4. Tailscale Network
-- **Nodes**: Linux server, Vengeance gaming rig, ndnlinuxsrv2
+- **Nodes**: Configured in health_check.py
 - **Check**: Ping connectivity between nodes
 
 ## Manual Checks
@@ -46,10 +45,10 @@ If the script isn't available, run these commands:
 curl -s http://localhost:8000/health
 
 # PostgreSQL
-psql -h 100.77.248.9 -U postgres -d claude_memory -c "SELECT 1"
+psql -h localhost -U postgres -d claude_memory -c "SELECT 1"
 
-# Ollama (Vengeance)
-curl -s http://100.98.226.75:11434/api/tags | python3 -c "import json,sys; print(json.load(sys.stdin)['models'])"
+# Ollama
+curl -s http://localhost:11434/api/tags | python3 -c "import json,sys; print(json.load(sys.stdin)['models'])"
 
 # Tailscale
 tailscale status
@@ -60,8 +59,8 @@ tailscale status
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `KB_API_HOST` | `http://localhost:8000` | Kage Bunshin API server |
-| `OLLAMA_HOST` | `http://100.98.226.75:11434` | Ollama server (Vengeance) |
-| `PG_HOST` | `100.77.248.9` | PostgreSQL host |
+| `OLLAMA_HOST` | `http://localhost:11434` | Ollama server |
+| `PG_HOST` | `localhost` | PostgreSQL host |
 | `PG_DATABASE` | `claude_memory` | Database name |
 
 ## Output Format
@@ -75,7 +74,7 @@ Component          Status    Details
 ---------          ------    -------
 API Server         OK        localhost:8000 responding
 PostgreSQL         OK        claude_memory connected
-Ollama (Vengeance) OK        4 models available
+Ollama             OK        4 models available
 Tailscale          OK        3 nodes online
 
 Overall: HEALTHY

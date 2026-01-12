@@ -27,9 +27,6 @@ python3 ~/.claude/plugins/local/kage-bunshin/skills/kb-status/scripts/health_che
 | PostgreSQL | `psql SELECT 1` | Connection success |
 | Ollama | GET /api/tags | Models listed |
 | Tailscale | `tailscale status` | Nodes online |
-| Vengeance | SSH port 22 | Reachable |
-| Linux Server | SSH port 22 | Reachable |
-| ndnlinuxsrv2 | SSH port 22 | Reachable |
 
 **Output:**
 ```
@@ -41,9 +38,6 @@ API Server             OK       localhost:8000 responding
 PostgreSQL             OK       claude_memory@localhost
 Ollama                 OK       4 models: deepseek-r1:32b, deepseek-code...
 Tailscale              OK       6 nodes online
-Node: Vengeance        OK       100.98.226.75 reachable
-Node: Linux Server     OK       100.77.248.9 reachable
-Node: ndnlinuxsrv2     OK       100.113.166.1 reachable
 --------------------------------------------------
 Overall: HEALTHY
 ```
@@ -57,13 +51,13 @@ Query 4+ LLMs in parallel and get a synthesized answer.
 /council "What are the benefits of TypeScript?"
 
 # Or run directly with flags
-python3 /home/ndninja/projects/llm-council/council.py --stream "Your question"
+python3 ~/projects/llm-council/council.py --stream "Your question"
 
 # With peer review (2-stage deliberation)
-python3 /home/ndninja/projects/llm-council/council.py --stream --peer-review "Complex question"
+python3 ~/projects/llm-council/council.py --stream --peer-review "Complex question"
 
 # Disable specialists
-python3 /home/ndninja/projects/llm-council/council.py --stream --no-specialists "Coding question"
+python3 ~/projects/llm-council/council.py --stream --no-specialists "Coding question"
 ```
 
 **Models:**
@@ -114,7 +108,7 @@ python3 ~/.claude/plugins/local/kage-bunshin/skills/ollama-smoke-test/scripts/sm
 OLLAMA SMOKE TEST RESULTS
 ==================================================
 Model: qwen2.5:32b
-Host: http://100.98.226.75:11434
+Host: http://localhost:11434
 
 Probe              Result   Time     Details
 --------------------------------------------------
@@ -133,7 +127,7 @@ Total time: 26.7s
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `KB_API_HOST` | `http://localhost:8000` | Kage Bunshin API server |
-| `OLLAMA_HOST` | `http://100.98.226.75:11434` | Ollama server (Vengeance) |
+| `OLLAMA_HOST` | `http://localhost:11434` | Ollama server |
 | `OLLAMA_TIMEOUT` | `60` | Request timeout in seconds |
 | `PG_HOST` | `localhost` | PostgreSQL host |
 | `PG_DATABASE` | `claude_memory` | Database name |
@@ -141,13 +135,15 @@ Total time: 26.7s
 
 ## Infrastructure
 
-### Nodes (Tailscale)
+Configure your nodes in `skills/kb-status/scripts/health_check.py`:
 
-| Node | IP | Role |
-|------|-----|------|
-| Vengeance | 100.98.226.75 | Gaming rig, Ollama GPU inference |
-| Linux Server | 100.77.248.9 | PostgreSQL, main workstation |
-| ndnlinuxsrv2 | 100.113.166.1 | Secondary server |
+```python
+nodes = [
+    ("<GPU_PRIMARY_IP>", "node-gpu-primary"),
+    ("<PRIMARY_IP>", "node-primary"),
+    ("<SECONDARY_IP>", "node-secondary"),
+]
+```
 
 ### Models Available
 

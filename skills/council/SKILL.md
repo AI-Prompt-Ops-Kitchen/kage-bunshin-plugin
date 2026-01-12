@@ -12,16 +12,16 @@ Query 4+ LLMs in parallel and synthesize their responses into a comprehensive an
 
 ```bash
 # Basic query (streaming enabled by default)
-python3 /home/ndninja/projects/llm-council/council.py --stream "Your question here"
+python3 ~/projects/llm-council/council.py --stream "Your question here"
 
 # With peer review (2-stage deliberation, 2x cost)
-python3 /home/ndninja/projects/llm-council/council.py --stream --peer-review "Complex question"
+python3 ~/projects/llm-council/council.py --stream --peer-review "Complex question"
 
 # Disable specialists (core 4 models only)
-python3 /home/ndninja/projects/llm-council/council.py --stream --no-specialists "Coding question"
+python3 ~/projects/llm-council/council.py --stream --no-specialists "Coding question"
 
 # Fresh results (skip cache)
-python3 /home/ndninja/projects/llm-council/council.py --stream --no-cache "Latest news"
+python3 ~/projects/llm-council/council.py --stream --no-cache "Latest news"
 ```
 
 ## Models
@@ -69,30 +69,30 @@ Results are:
 
 ### Coding Question (auto-includes DeepSeek Coder)
 ```bash
-python3 /home/ndninja/projects/llm-council/council.py --stream "Write a Python function to find the longest palindromic substring"
+python3 ~/projects/llm-council/council.py --stream "Write a Python function to find the longest palindromic substring"
 ```
 
 ### Math Question (auto-includes DeepSeek R1)
 ```bash
-python3 /home/ndninja/projects/llm-council/council.py --stream "Solve the integral of x^2 * e^x dx"
+python3 ~/projects/llm-council/council.py --stream "Solve the integral of x^2 * e^x dx"
 ```
 
 ### Architecture Decision (peer review recommended)
 ```bash
-python3 /home/ndninja/projects/llm-council/council.py --stream --peer-review "What are the trade-offs between microservices and monolithic architectures?"
+python3 ~/projects/llm-council/council.py --stream --peer-review "What are the trade-offs between microservices and monolithic architectures?"
 ```
 
 ### Quick General Question
 ```bash
-python3 /home/ndninja/projects/llm-council/council.py --stream --no-specialists "What are 3 benefits of remote work?"
+python3 ~/projects/llm-council/council.py --stream --no-specialists "What are 3 benefits of remote work?"
 ```
 
 ## History & Search
 
 ```bash
 # View recent queries
-python3 /home/ndninja/projects/llm-council/council.py --history
+python3 ~/projects/llm-council/council.py --history
 
 # Search past queries
-python3 /home/ndninja/projects/llm-council/council.py --search "TypeScript"
+python3 ~/projects/llm-council/council.py --search "TypeScript"
 ```
